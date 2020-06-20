@@ -77,6 +77,8 @@ class FFmpeg(
 
     /** 指定された引数で実行する */
     fun invoke(command : String, reader : FFmpeg.(InputStream, OutputStream, InputStream)->(Unit) = defreader ){
+        out = command
+
         // 実行する
         val process = Runtime.getRuntime().exec("$path $command")
         reader(process.inputStream, process.outputStream, process.errorStream)

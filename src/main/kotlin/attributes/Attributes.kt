@@ -36,10 +36,10 @@ val Triple<GenericAttributes, Map<InputAttributes, File>, Map<OutputAttributes, 
     return listOf<String>(
         *gAttr.code.toTypedArray(),
         *infiles.map {
-            listOf<String>( *it.key.code.toTypedArray(), "-i", it.value.absolutePath )
+            listOf<String>( *it.key.code.toTypedArray(), "-i", "\"${it.value.absolutePath}\"" )
         }.flatten().toTypedArray(),
         *outfiles.map {
-            listOf<String>( *it.key.code.toTypedArray(), it.value.absolutePath )
+            listOf<String>( *it.key.code.toTypedArray(), "\"${it.value.absolutePath}\"" )
         }.flatten().toTypedArray()
     )
 }

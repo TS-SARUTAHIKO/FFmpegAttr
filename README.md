@@ -11,7 +11,7 @@ FFmpeg を Kotlin で扱うためのラッパー
 
 ```kotlin.gradle
 repositories {
-    maven { url 'https://github.com/TS-SARUTAHIKO/kwffmpeg/raw/master/repository/' }
+    maven { url 'https://github.com/TS-SARUTAHIKO/FFmpegAttr/raw/master/repository/' }
 }
 ```
 
@@ -19,7 +19,7 @@ repositories {
 
 ```kotlin.gradle
 dependencies {
-    compile 'com.xxxsarutahikoxxx.kotlin:kwffmpeg:1.0.0'
+    implementation 'com.xxxsarutahikoxxx.kotlin:FFmpegAttr:1.0.0'
 }
 ```
 
