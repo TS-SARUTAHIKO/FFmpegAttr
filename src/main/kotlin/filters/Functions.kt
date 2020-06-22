@@ -2,10 +2,7 @@ package filters
 
 import com.xxxsarutahikoxxx.kotlin.FFmpegAttr.attrSetter.filter_complex_
 import com.xxxsarutahikoxxx.kotlin.FFmpegAttr.attrSetter.y
-import com.xxxsarutahikoxxx.kotlin.FFmpegAttr.attributes.IOAttributes
-import com.xxxsarutahikoxxx.kotlin.FFmpegAttr.attributes.aiAttr
-import com.xxxsarutahikoxxx.kotlin.FFmpegAttr.attributes.aoAttr
-import com.xxxsarutahikoxxx.kotlin.FFmpegAttr.attributes.gAttr
+import com.xxxsarutahikoxxx.kotlin.FFmpegAttr.attributes.*
 import com.xxxsarutahikoxxx.kotlin.FFmpegAttr.executor.FFmpeg
 import com.xxxsarutahikoxxx.kotlin.FFmpegAttr.executor.ffmpeg
 import java.io.File
@@ -29,3 +26,4 @@ fun FFmpeg.Companion.amerge(outfile : File, infiles : List<File>){
         true
     )
 }
+

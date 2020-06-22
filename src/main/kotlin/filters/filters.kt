@@ -4393,7 +4393,6 @@ summary         2            ..F.A.....
 class loudnorm(
     val I : Any? = null,
     val LRA : Any? = null,
-    val lra : Any? = null,
     val TP : Any? = null,
     val measured_I : Any? = null,
     val measured_i : Any? = null,
@@ -4407,6 +4406,7 @@ class loudnorm(
     val dual_mono : Any? = null,
     val print_format : Any? = null,
     val _i : Any? = null,
+    val lra : Any? = null,
     val tp : Any? = null,
 
     inLabels : String = "",
