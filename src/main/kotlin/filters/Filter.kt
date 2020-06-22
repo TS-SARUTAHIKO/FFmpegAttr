@@ -70,21 +70,21 @@ open class FilterImpl private constructor(
  * 接続方法が false なら チェーン接続 (,)
  *
  * */
-class FilterComplex(filter : Filter) : FilterOrComplex, MutableMap<Filter, Boolean?> by mutableMapOf( filter to null ) {
+class FilterComplex(filter : Filter) : FilterOrComplex, MutableList<Pair<Filter, Boolean?>> by mutableListOf( filter to null ) {
     val code : String get(){
-        val ret = entries.joinToString(""){
-            val type = when( it.value ){
+        val ret = joinToString(""){
+            val type = when( it.second ){
                 true -> ";"
                 false -> ","
                 null -> ""
             }
-            "${type}${it.key.code}"
+            "${type}${it.first.code}"
         }
         return "\"$ret\""
     }
 
-    fun graph(filter : Filter) = put(filter, true)
-    fun chain(filter : Filter) = put(filter, false)
+    fun graph(filter : Filter) = add(filter to true)
+    fun chain(filter : Filter) = add(filter to false)
 }
 
 /**
@@ -107,22 +107,22 @@ object FilterMixer {
 
     infix fun FilterComplex.graph(complex : FilterComplex) : FilterComplex {
         return this.apply {
-            complex.entries.map {
-                when( it.value ){
-                    true -> this.graph(it.key)
-                    false -> this.chain(it.key)
-                    null -> this.graph(it.key)
+            complex.forEach {
+                when( it.second ){
+                    true -> this.graph(it.first)
+                    false -> this.chain(it.first)
+                    null -> this.graph(it.first)
                 }
             }
         }
     }
     infix fun FilterComplex.chain(complex : FilterComplex) : FilterComplex {
         return this.apply {
-            complex.entries.map {
-                when( it.value ){
-                    true -> this.graph(it.key)
-                    false -> this.chain(it.key)
-                    null -> this.chain(it.key)
+            complex.forEach {
+                when( it.second ){
+                    true -> this.graph(it.first)
+                    false -> this.chain(it.first)
+                    null -> this.chain(it.first)
                 }
             }
         }
@@ -130,22 +130,22 @@ object FilterMixer {
 
     infix fun Filter.graph(complex : FilterComplex) : FilterComplex {
         return FilterComplex(this).apply {
-            complex.entries.map {
-                when( it.value ){
-                    true -> this.graph(it.key)
-                    false -> this.chain(it.key)
-                    null -> this.graph(it.key)
+            complex.forEach {
+                when( it.second ){
+                    true -> this.graph(it.first)
+                    false -> this.chain(it.first)
+                    null -> this.graph(it.first)
                 }
             }
         }
     }
     infix fun Filter.chain(complex : FilterComplex) : FilterComplex {
         return FilterComplex(this).apply {
-            complex.entries.map {
-                when( it.value ){
-                    true -> this.graph(it.key)
-                    false -> this.chain(it.key)
-                    null -> this.chain(it.key)
+            complex.forEach {
+                when( it.second ){
+                    true -> this.graph(it.first)
+                    false -> this.chain(it.first)
+                    null -> this.chain(it.first)
                 }
             }
         }
